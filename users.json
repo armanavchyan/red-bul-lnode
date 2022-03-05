@@ -1,12 +1,5 @@
 [
     {
-        "username": "Arm8",
-        "fName": "Arsen",
-        "lName": "Avchyan",
-        "age": "22",
-        "password": "111555"
-    },
-    {
         "username": "Arm1",
         "fName": "Armen",
         "lName": "Avchyan",
@@ -15,6 +8,13 @@
     },
     {
         "username": "Arm2",
+        "fName": "Aff",
+        "lName": "Avchyan",
+        "age": "29",
+        "password": "111555"
+    },
+    {
+        "username": "Arm555",
         "fName": "Aff",
         "lName": "Avchyan",
         "age": "29",

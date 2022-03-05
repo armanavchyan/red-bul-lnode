@@ -1,18 +1,18 @@
 [
     {
-        "name": "pringls",
-        "price": "2000",
-        "weigh": "20",
-        "componyName": "fndyao",
-        "productType": "food",
-        "foodType": "chips"
-    },
-    {
         "name": "luxe",
         "price": "1000",
         "weigh": "30",
         "componyName": "kraft",
         "productType": "food",
         "foodType": "chips"
+    },
+    {
+        "name": "ka",
+        "price": "500",
+        "weigh": "100",
+        "componyName": "Kraft",
+        "productType": "food",
+        "foodType": "choclate"
     }
 ]

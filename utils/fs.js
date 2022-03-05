@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable linebreak-style */
 import fs from "fs";
 
 export function createFile(incPath) {
