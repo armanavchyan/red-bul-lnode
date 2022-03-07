@@ -9,10 +9,13 @@
 /* eslint-disable space-in-parens */
 /* eslint-disable linebreak-style */
 
+import path from "path";
 import { readFile } from "./fs.js";
 
+const prodUrl = path.resolve("api/product/product.json");
+
 export async function prodIndexValidatr(req, res, next) {
-  const product = await readFile("product.json");
+  const product = await readFile(prodUrl);
   const { params: { id } } = req;
   if (id < 0 || id >= product.length) {
     next("error user is not founded");

@@ -8,11 +8,14 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 /* eslint-disable linebreak-style */
+import path from 'path';
 
 import { readFile } from "./fs.js";
 
+const usersUrl = path.resolve("api/user/users.json");
+
 export async function userIndexValidatr(req, res, next) {
-  const users = await readFile('users.json');
+  const users = await readFile(usersUrl);
   const { params: { id } } = req;
   if (id < 0 || id >= users.length) {
     next("error user is not founded");
