@@ -1,11 +1,11 @@
 [
     {
-        "name": "ka",
-        "price": "500",
-        "weigh": "100",
-        "componyName": "Draft",
+        "name": "luxe2",
+        "price": "1000",
+        "weigh": "30",
+        "componyName": "Kraft",
         "productType": "food",
-        "foodType": "choclate"
+        "foodType": "chips"
     },
     {
         "name": "luxe",
@@ -14,5 +14,29 @@
         "componyName": "Draft",
         "productType": "food",
         "foodType": "choclate"
+    },
+    {
+        "name": "luxe2",
+        "price": "1000",
+        "weigh": "30",
+        "componyName": "Kraft",
+        "productType": "food",
+        "foodType": "chips"
+    },
+    {
+        "name": "luxe2",
+        "price": "1000",
+        "weigh": "30",
+        "componyName": "Kraft",
+        "productType": "food",
+        "foodType": "chips"
+    },
+    {
+        "name": "luxe2",
+        "price": "1000",
+        "weigh": "30",
+        "componyName": "Kraft",
+        "productType": "food",
+        "foodType": "chips"
     }
 ]

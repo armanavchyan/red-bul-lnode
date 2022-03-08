@@ -18,7 +18,7 @@ export async function prodIndexValidatr(req, res, next) {
   const product = await readFile(prodUrl);
   const { params: { id } } = req;
   if (id < 0 || id >= product.length) {
-    next("error user is not founded");
+    next("error product is not founded");
   }
   next();
 }

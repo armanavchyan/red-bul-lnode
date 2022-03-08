@@ -2,7 +2,6 @@
   "type": "module",
   "name": "web-cv",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,12 +12,24 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
-    "express-validator": "^6.14.0"
+    "express-validator": "^6.14.0",
+    "mongoose": "^6.2.4",
+    "morgan": "^1.10.0",
+    "method-override": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armanavchyan/red-bul-lnode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/armanavchyan/red-bul-lnode/issues"
+  },
+  "homepage": "https://github.com/armanavchyan/red-bul-lnode#readme",
+  "description": ""
 }
