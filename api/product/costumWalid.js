@@ -1,21 +1,28 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
+/* eslint-disable linebreak-style */
 /* eslint-disable import/extensions */
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
-import path from "path";
-import { readFile } from "../../utils/fs.js";
+import { getAllService } from "./service.js";
 
-const productsUrl = path.resolve("api/product/product.json");
 export function nameCostomValid(val) {
-  if (val < "A" || val > "Z") {
-    return true;
+  if (val[0] < "A" || val[0] > "Z") {
+    return Promise.reject();
   }
-  return false;
+  return true;
 }
+
 export async function indexCostumValidatr(val) {
-  const product = await readFile(productsUrl);
-  if (val < 0 || val >= product.length) {
-    return true;
+  const products = Object.values(await getAllService());
+
+  for (let i = 0; i < products.length; i++) {
+    if (`new ObjectId("${val}")` !== products[i]._id) {
+      return Promise.reject();
+    }
   }
-  return false;
+  return true;
 }

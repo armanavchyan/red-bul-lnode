@@ -9,9 +9,11 @@
 /* eslint-disable import/extensions */
 import express from "express";
 import morgan from 'morgan';
+import mongoose from "mongoose";
 import userRouter from "./api/user/router.js";
 import productRouter from "./api/product/router.js";
 
+mongoose.connect('mongodb+srv://root:root@redbull.vql9r.mongodb.net/redbull?retryWrites=true&w=majority');
 const app = express();
 
 app.use(express.json());

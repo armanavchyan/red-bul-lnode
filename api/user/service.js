@@ -1,49 +1,35 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable quotes */
 /* eslint-disable import/extensions */
 /* eslint-disable linebreak-style */
-import path from "path";
-import {
-  createFile, readFile, writeFile, isExsist,
-} from "../../utils/fs.js";
+import mongoose from 'mongoose';
+import User from "../../models/user.js";
 
-const usersUrl = path.resolve("api/user/users.json");
-
-export async function getOneService(params) {
-  const { id } = params;
-  const users = await readFile(usersUrl);
-  const user = users[id];
+export async function getOneService(id) {
+  const user = await User.findById(id);
   return user;
 }
 export async function getAllService() {
-  const users = await readFile(usersUrl);
+  const users = await User.find();
   return users;
 }
 
 export async function createService(body) {
-  if (!isExsist(usersUrl)) {
-    await createFile(usersUrl);
-  }
-  let users = await readFile(usersUrl);
-  if (!users) {
-    users = [];
-  }
-  users.push(body);
-  await writeFile(usersUrl, users);
-  return body;
+  const user = new User({
+    _id: mongoose.Types.ObjectId(),
+    ...body,
+  });
+  await user.save();
+
+  return user;
 }
 
-export async function updateService(body, params) {
-  const { id } = params;
-  const users = await readFile(usersUrl);
-  users[id] = body;
-  await writeFile(usersUrl, users);
-  return body;
+export async function updateService(body, id) {
+  const user = await User.updateOne({ _id: id }, body);
+  return user;
 }
 
-export async function removeService(params) {
-  const { id } = params;
-  const users = await readFile(usersUrl);
-  users.splice(id, 1);
-  await writeFile(usersUrl, users);
-  return users;
+export async function removeService(id) {
+  const user = await User.remove({ _id: id });
+  return user;
 }

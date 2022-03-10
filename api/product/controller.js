@@ -7,8 +7,8 @@ import {
 
 export async function getOne(req, res, next) {
   try {
-    const { params } = req;
-    const getProduct = await getOneService(params);
+    const { params: { id } } = req;
+    const getProduct = await getOneService(id);
     return res.send(JSON.stringify(getProduct));
   } catch (err) {
     return next(err);
@@ -36,8 +36,8 @@ export async function create(req, res, next) {
 
 export async function update(req, res, next) {
   try {
-    const { body, params } = req;
-    const updatedProduct = await updateService(body, params);
+    const { body, params: { id } } = req;
+    const updatedProduct = await updateService(body, id);
     return res.send(JSON.stringify(updatedProduct));
   } catch (err) {
     return next(err);
@@ -46,8 +46,8 @@ export async function update(req, res, next) {
 
 export async function remove(req, res, next) {
   try {
-    const { params } = req;
-    const deletedProduct = await removeService(params);
+    const { params: { id } } = req;
+    const deletedProduct = await removeService(id);
     return res.send(JSON.stringify(deletedProduct));
   } catch (err) {
     return next(err);

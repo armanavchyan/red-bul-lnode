@@ -25,14 +25,8 @@ router.get("/", getAll);
 
 router.get(
   "/:id",
-  param("id", userError).isInt({ min: 0 }),
-  param("id", userError).toInt().custom(async (value) => {
-    const geted = await indexCostumValidatr(value);
-    if (geted) {
-      return Promise.reject();
-    }
-    return true;
-  }),
+  param("id", userError).custom(indexCostumValidatr),
+
   getOne,
 );
 
@@ -40,23 +34,9 @@ router.post(
   "/",
   body("username", userNameLenght).isLength({ min: 4 }),
 
-  body("fName", userNameError).isLength({ min: 2 }).custom((value) => {
-    const geted = nameCostomValid(value);
-    if (geted) {
-      return Promise.reject();
-    }
-    return true;
-  })
-    .isAlpha(),
+  body("fName", contentNameError).isLength({ min: 2 }).custom(nameCostomValid).isAlpha(),
 
-  body("lName", userNameError).isLength({ min: 2 }).custom((value) => {
-    const geted = nameCostomValid(value);
-    if (geted) {
-      return Promise.reject();
-    }
-    return true;
-  })
-    .isAlpha(),
+  body("lName", contentNameError).isLength({ min: 2 }).custom(nameCostomValid).isAlpha(),
 
   body("age", userAgeError).isInt({ min: 1 }),
 
@@ -67,31 +47,14 @@ router.post(
 
 router.patch(
   "/:id",
-  param("id", userError).isInt({ min: 0 }).custom((value) => {
-    const geted = indexCostumValidatr(value);
-    if (geted) {
-      return Promise.reject();
-    }
-    return true;
-  }),
+  param("id", userError).custom(indexCostumValidatr),
+
   body("username", userNameLenght).optional().isLength({ min: 4 }),
 
-  body("fName", userNameError).optional().isLength({ min: 2 }).custom((value) => {
-    const geted = nameCostomValid(value);
-    if (geted) {
-      return Promise.reject();
-    }
-    return true;
-  })
+  body("fName", contentNameError).optional().isLength({ min: 2 }).custom(nameCostomValid)
     .isAlpha(),
 
-  body("lName", userNameError).optional().isLength({ min: 2 }).custom((value) => {
-    const geted = nameCostomValid(value);
-    if (geted) {
-      return Promise.reject();
-    }
-    return true;
-  })
+  body("lName", contentNameError).optional().isLength({ min: 2 }).custom(nameCostomValid)
     .isAlpha(),
 
   body("age", userAgeError).optional().isInt({ min: 1, max: 150 }),
@@ -103,13 +66,7 @@ router.patch(
 
 router.delete(
   "/:id",
-  param("id", userError).isInt({ min: 0 }).custom((value) => {
-    const geted = indexCostumValidatr(value);
-    if (geted) {
-      return Promise.reject();
-    }
-    return true;
-  }),
+  param("id", userError).custom(indexCostumValidatr),
   expressValidationResult,
   remove,
 );

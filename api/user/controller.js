@@ -7,9 +7,9 @@ import {
 
 export async function getOne(req, res, next) {
   try {
-    const { params } = req;
-    const get = await getOneService(params);
-    res.send(JSON.stringify(get));
+    const { params: { id } } = req;
+    const user = await getOneService(id);
+    res.send(JSON.stringify(user));
   } catch (err) {
     next(err);
   }
@@ -17,8 +17,8 @@ export async function getOne(req, res, next) {
 
 export async function getAll(req, res, next) {
   try {
-    const geted = await getAllService();
-    res.send(JSON.stringify(geted));
+    const users = await getAllService();
+    res.send(JSON.stringify(users));
   } catch (err) {
     next(err);
   }
@@ -27,8 +27,8 @@ export async function getAll(req, res, next) {
 export async function create(req, res, next) {
   try {
     const { body } = req;
-    const created = await createService(body);
-    res.send(JSON.stringify(created));
+    const users = await createService(body);
+    res.send(JSON.stringify(users));
   } catch (err) {
     next(err);
   }
@@ -36,9 +36,9 @@ export async function create(req, res, next) {
 
 export async function update(req, res, next) {
   try {
-    const { body, params } = req;
-    const updated = await updateService(body, params);
-    res.send(JSON.stringify(updated));
+    const { body, params: { id } } = req;
+    const users = await updateService(body, id);
+    res.send(JSON.stringify(users));
   } catch (err) {
     next(err);
   }
@@ -46,9 +46,9 @@ export async function update(req, res, next) {
 
 export async function remove(req, res, next) {
   try {
-    const { params } = req;
-    const deleted = await removeService(params);
-    res.send(JSON.stringify(deleted));
+    const { params: { id } } = req;
+    const users = await removeService(id);
+    res.send(JSON.stringify(users));
   } catch (err) {
     next(err);
   }
