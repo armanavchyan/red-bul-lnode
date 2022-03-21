@@ -5,48 +5,48 @@ import {
 export async function getOne(req, res, next) {
   try {
     const { params: { id } } = req;
-    const user = await getOneService(id);
-    res.send(JSON.stringify(user));
+    const getPc = await getOneService(id);
+    return res.send(JSON.stringify(getPc));
   } catch (err) {
-    next(err);
+    return next(err);
   }
 }
 
 export async function getAll(req, res, next) {
   try {
-    const users = await getAllService();
-    res.send(JSON.stringify(users));
+    const getPcs = await getAllService();
+    return res.send(JSON.stringify(getPcs));
   } catch (err) {
-    next(err);
+    return next(err);
   }
 }
 
 export async function create(req, res, next) {
   try {
     const { body } = req;
-    const users = await createService(body);
-    res.send(JSON.stringify(users));
+    const createPc = await createService(body);
+    return res.send(JSON.stringify(createPc));
   } catch (err) {
-    next(err);
+    return next(err);
   }
 }
 
 export async function update(req, res, next) {
   try {
     const { body, params: { id } } = req;
-    const users = await updateService(body, id);
-    res.send(JSON.stringify(users));
+    const updatPc = await updateService(body, id);
+    return res.send(JSON.stringify(updatPc));
   } catch (err) {
-    next(err);
+    return next(err);
   }
 }
 
 export async function remove(req, res, next) {
   try {
     const { params: { id } } = req;
-    const users = await removeService(id);
-    res.send(JSON.stringify(users));
+    const deletPc = await removeService(id);
+    return res.send(JSON.stringify(deletPc));
   } catch (err) {
-    next(err);
+    return next(err);
   }
 }

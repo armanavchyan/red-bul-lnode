@@ -1,28 +1,33 @@
+/* eslint-disable no-undef */
 /* eslint-disable quotes */
 import mongoose from "mongoose";
 
-const User = mongoose.model("User", {
+const Mouse = mongoose.model("Mouse", {
   _id: mongoose.Schema.Types.ObjectId,
-  username: {
+  name: {
     type: String,
     required: true,
   },
-  fName: {
+  brand: {
     type: String,
     required: true,
   },
-  lName: {
-    type: String,
+  isWireless: {
+    type: Boolean,
     required: true,
   },
-  age: {
+  price: {
     type: Number,
     required: true,
   },
-  password: {
+  color: {
     type: String,
+    required: true,
+  },
+  image: {
+    type: mongoose.ObjectId,
     required: true,
   },
 });
 
-export default User;
+export default Mouse;

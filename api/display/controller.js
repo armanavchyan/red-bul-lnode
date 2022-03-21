@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/extensions */
-/* eslint-disable linebreak-style */
 import {
   getOneService, getAllService, createService, updateService, removeService,
 } from "./service.js";
@@ -8,8 +5,8 @@ import {
 export async function getOne(req, res, next) {
   try {
     const { params: { id } } = req;
-    const getProduct = await getOneService(id);
-    return res.send(JSON.stringify(getProduct));
+    const getDisplay = await getOneService(id);
+    return res.send(JSON.stringify(getDisplay));
   } catch (err) {
     return next(err);
   }
@@ -17,8 +14,8 @@ export async function getOne(req, res, next) {
 
 export async function getAll(req, res, next) {
   try {
-    const getedProducts = await getAllService();
-    return res.send(JSON.stringify(getedProducts));
+    const getDisplays = await getAllService();
+    return res.send(JSON.stringify(getDisplays));
   } catch (err) {
     return next(err);
   }
@@ -27,8 +24,8 @@ export async function getAll(req, res, next) {
 export async function create(req, res, next) {
   try {
     const { body } = req;
-    const createdProduct = await createService(body);
-    return res.send(JSON.stringify(createdProduct));
+    const createDisplay = await createService(body);
+    return res.send(JSON.stringify(createDisplay));
   } catch (err) {
     return next(err);
   }
@@ -37,8 +34,8 @@ export async function create(req, res, next) {
 export async function update(req, res, next) {
   try {
     const { body, params: { id } } = req;
-    const updatedProduct = await updateService(body, id);
-    return res.send(JSON.stringify(updatedProduct));
+    const updatDisplay = await updateService(body, id);
+    return res.send(JSON.stringify(updatDisplay));
   } catch (err) {
     return next(err);
   }
@@ -47,8 +44,8 @@ export async function update(req, res, next) {
 export async function remove(req, res, next) {
   try {
     const { params: { id } } = req;
-    const deletedProduct = await removeService(id);
-    return res.send(JSON.stringify(deletedProduct));
+    const deletDisplay = await removeService(id);
+    return res.send(JSON.stringify(deletDisplay));
   } catch (err) {
     return next(err);
   }

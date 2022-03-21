@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/prefer-default-export */
 import { validationResult } from "express-validator";
 
 export function expressValidationResult(req, res, next) {

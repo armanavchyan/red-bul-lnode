@@ -1,16 +1,15 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable quotes */
-/* eslint-disable import/extensions */
-/* eslint-disable linebreak-style */
 import mongoose from 'mongoose';
 import User from "../../models/user.js";
 
 export async function getOneService(id) {
-  const user = await User.findById(id);
+  const user = await User.findById(id)
+    .select(["username", "fName", "lName", "age"]);
   return user;
 }
 export async function getAllService() {
-  const users = await User.find();
+  const users = await User.find()
+    .select(["username", "fName", "lName", "age"]);
   return users;
 }
 
@@ -25,11 +24,13 @@ export async function createService(body) {
 }
 
 export async function updateService(body, id) {
-  const user = await User.updateOne({ _id: id }, body);
+  const user = await User.findByIdAndUpdate({ _id: id }, body)
+    .select(["username", "fName", "lName", "age"]);
   return user;
 }
 
 export async function removeService(id) {
-  const user = await User.remove({ _id: id });
+  const user = await User.findByIdAndRemove({ _id: id })
+    .select(["username", "fName", "lName", "age"]);
   return user;
 }

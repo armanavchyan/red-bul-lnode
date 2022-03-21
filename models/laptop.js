@@ -1,28 +1,29 @@
+/* eslint-disable no-undef */
 /* eslint-disable quotes */
 import mongoose from "mongoose";
 
-const User = mongoose.model("User", {
+const Laptop = mongoose.model("Laptop", {
   _id: mongoose.Schema.Types.ObjectId,
-  username: {
+  name: {
     type: String,
     required: true,
   },
-  fName: {
-    type: String,
-    required: true,
-  },
-  lName: {
-    type: String,
-    required: true,
-  },
-  age: {
+  price: {
     type: Number,
     required: true,
   },
-  password: {
+  weight: {
+    type: Number,
+    required: true,
+  },
+  brand: {
+    type: String,
+    required: true,
+  },
+  color: {
     type: String,
     required: true,
   },
 });
 
-export default User;
+export default Laptop;

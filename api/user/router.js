@@ -1,74 +1,68 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable new-cap */
-/* eslint-disable linebreak-style */
 /* eslint-disable import/named */
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
-/* eslint-disable import/extensions */
+/* eslint-disable quotes */
 import express from "express";
 import { body, param } from "express-validator";
-import {
-  userNameLenght, userError, contentNameError, userAgeError, userNameError,
-} from "./errorMessages.js";
-import {
-  getAll, getOne, create, update, remove,
-}
-  from "./controller.js";
 import { expressValidationResult } from "../../utils/middlewares.js";
-import { nameCostomValid } from "../product/costumWalid.js";
-import { indexCostumValidatr } from "./costumWalid.js";
+import * as nameError from './errorMessages.js';
+import * as validator from "./validator.js";
+import * as controller from "./controller.js";
+import * as errorMessages from '../../constants/errorMessages.js';
 
 const router = express.Router();
 
-router.get("/", getAll);
+router.get("/", controller.getAll);
 
 router.get(
   "/:id",
-  param("id", userError).custom(indexCostumValidatr),
+  param("id", errorMessages.notFound).custom(validator.isExists),
 
-  getOne,
+  controller.getOne,
 );
 
 router.post(
   "/",
-  body("username", userNameLenght).isLength({ min: 4 }),
+  body("username", errorMessages.stringErrMessage(4, 255)).isLength({ min: 4, max: 255 }),
 
-  body("fName", contentNameError).isLength({ min: 2 }).custom(nameCostomValid).isAlpha(),
+  body("fName", errorMessages.stringErrMessage(2, 255)).isLength({ min: 2, max: 255 }),
+  body("fName", nameError).custom(validator.nameCostomValid).isAlpha(),
 
-  body("lName", contentNameError).isLength({ min: 2 }).custom(nameCostomValid).isAlpha(),
+  body("lName", errorMessages.stringErrMessage(2, 255)).isLength({ min: 2, max: 255 }),
+  body("lName", nameError).custom(validator.nameCostomValid).isAlpha(),
 
-  body("age", userAgeError).isInt({ min: 1 }),
+  body("age", errorMessages.integerErrMessage(1, 150)).isInt({ min: 1, max: 150 }),
 
   expressValidationResult,
 
-  create,
+  controller.create,
 );
 
 router.patch(
   "/:id",
-  param("id", userError).custom(indexCostumValidatr),
+  param("id", errorMessages.notFound).custom(validator.isExists),
 
-  body("username", userNameLenght).optional().isLength({ min: 4 }),
+  body("username").optional().isLength({ min: 4, max: 255 }),
 
-  body("fName", contentNameError).optional().isLength({ min: 2 }).custom(nameCostomValid)
+  body("fName", errorMessages.nameOnlyLetters).optional()
+    .isLength({ min: 2, max: 255 }).custom(validator.nameCostomValid)
     .isAlpha(),
 
-  body("lName", contentNameError).optional().isLength({ min: 2 }).custom(nameCostomValid)
+  body("lName", errorMessages.nameOnlyLetters).optional()
+    .isLength({ min: 2, max: 255 }).custom(validator.nameCostomValid)
     .isAlpha(),
 
-  body("age", userAgeError).optional().isInt({ min: 1, max: 150 }),
+  body("age", errorMessages.integerErrMessage(1, 150)).optional().isInt({ min: 1, max: 150 }),
+  body('_id', errorMessages.notAccessible).optional().custom(() => Promise.reject()),
 
   expressValidationResult,
 
-  update,
+  controller.update,
 );
 
 router.delete(
   "/:id",
-  param("id", userError).custom(indexCostumValidatr),
+  param("id", errorMessages.notFound).custom(validator.isExists),
   expressValidationResult,
-  remove,
+  controller.remove,
 );
 
 export default router;
