@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import mongoose from 'mongoose';
-import Display from "../../models/pc.js";
+import Display from "../../models/display.js";
 
 export async function getOneService(id) {
   const display = await Display.findById(id)

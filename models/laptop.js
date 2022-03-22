@@ -24,6 +24,11 @@ const Laptop = mongoose.model("Laptop", {
     type: String,
     required: true,
   },
+  img: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'File',
+    required: true,
+  },
 });
 
 export default Laptop;

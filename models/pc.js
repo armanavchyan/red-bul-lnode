@@ -6,22 +6,15 @@ const Pc = mongoose.model("Pc", {
   _id: mongoose.Schema.Types.ObjectId,
   procName: {
     type: String,
-    required: true,
+    required: false,
   },
   price: {
     type: Number,
     required: true,
   },
-  weight: {
-    type: Number,
-    required: true,
-  },
-  brand: {
-    type: String,
-    required: true,
-  },
-  usb: {
-    type: Number,
+  img: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'File',
     required: true,
   },
   mouse: {
@@ -54,6 +47,14 @@ const Pc = mongoose.model("Pc", {
     required: false,
   },
   countRam: {
+    type: Number,
+  },
+  processor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Processor",
+    required: false,
+  },
+  countProc: {
     type: Number,
   },
 });

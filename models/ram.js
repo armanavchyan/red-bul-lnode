@@ -12,10 +12,6 @@ const Ram = mongoose.model("Ram", {
     type: String,
     required: true,
   },
-  color: {
-    type: String,
-    required: true,
-  },
   memorySpeed: {
     type: Number,
     required: true,
@@ -32,9 +28,9 @@ const Ram = mongoose.model("Ram", {
     type: Number,
     required: true,
   },
-
-  image: {
-    type: mongoose.ObjectId,
+  img: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'File',
     required: true,
   },
 });

@@ -4,12 +4,94 @@ import Pc from "../../models/pc.js";
 
 export async function getOneService(id) {
   const pc = await Pc.findById(id)
-    .select(["procName", "price", "weight", "brand", "usb"]).populate();
+    .populate([
+      {
+        path: 'img',
+        select: ['fileName'],
+      },
+      {
+        path: 'mouse',
+        model: 'Mouse',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'keyboard',
+        model: 'Keyboard',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'display',
+        model: 'Display',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'ram',
+        model: 'Ram',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'processor',
+        model: 'Processor',
+        populate: {
+          path: 'img',
+        },
+      },
+
+    ]);
   return pc;
 }
 export async function getAllService() {
   const pcs = await Pc.find()
-    .select(["procName", "price", "weight", "brand", "usb"]);
+    .populate([
+      {
+        path: 'img',
+        select: ['fileName'],
+      },
+      {
+        path: 'mouse',
+        model: 'Mouse',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'keyboard',
+        model: 'Keyboard',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'display',
+        model: 'Display',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'ram',
+        model: 'Ram',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'processor',
+        model: 'Processor',
+        populate: {
+          path: 'img',
+        },
+      },
+
+    ]);
   return pcs;
 }
 
@@ -24,12 +106,94 @@ export async function createService(body) {
 
 export async function updateService(body, id) {
   const pcs = await Pc.findByIdAndUpdate({ _id: id }, body)
-    .select(["procName", "price", "weight", "brand", "usb"]);
+    .populate([
+      {
+        path: 'img',
+        select: ['fileName'],
+      },
+      {
+        path: 'mouse',
+        model: 'Mouse',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'keyboard',
+        model: 'Keyboard',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'display',
+        model: 'Display',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'ram',
+        model: 'Ram',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'processor',
+        model: 'Processor',
+        populate: {
+          path: 'img',
+        },
+      },
+
+    ]);
   return pcs;
 }
 
 export async function removeService(id) {
   const pcs = await Pc.findByIdAndRemove({ _id: id })
-    .select(["procName", "price", "weight", "brand", "usb"]);
+    .populate([
+      {
+        path: 'img',
+        select: ['fileName'],
+      },
+      {
+        path: 'mouse',
+        model: 'Mouse',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'keyboard',
+        model: 'Keyboard',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'display',
+        model: 'Display',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'ram',
+        model: 'Ram',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'processor',
+        model: 'Processor',
+        populate: {
+          path: 'img',
+        },
+      },
+
+    ]);
   return pcs;
 }

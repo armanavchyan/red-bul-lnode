@@ -1,13 +1,12 @@
 /* eslint-disable quotes */
 import mongoose from 'mongoose';
-import Ram from "../../models/pc.js";
+import Ram from "../../models/ram.js";
 
 export async function getOneService(id) {
   const ram = await Ram.findById(id)
     .select([
       "name",
       "brand",
-      "color",
       "memorySpeed",
       "memorySize",
       "generation",
@@ -21,7 +20,6 @@ export async function getAllService() {
     .select([
       "name",
       "brand",
-      "color",
       "memorySpeed",
       "memorySize",
       "generation",
@@ -45,7 +43,6 @@ export async function updateService(body, id) {
     .select([
       "name",
       "brand",
-      "color",
       "memorySpeed",
       "memorySize",
       "generation",
@@ -61,7 +58,6 @@ export async function removeService(id) {
       [
         "name",
         "brand",
-        "color",
         "memorySpeed",
         "memorySize",
         "generation",

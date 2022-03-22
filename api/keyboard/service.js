@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import mongoose from 'mongoose';
-import Keyboard from "../../models/pc.js";
+import Keyboard from "../../models/keyboard.js";
 
 export async function getOneService(id) {
   const pc = await Keyboard.findById(id)

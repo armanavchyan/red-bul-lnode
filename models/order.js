@@ -9,7 +9,6 @@ const Order = mongoose.model("Order", {
   },
   countLap: {
     type: Number,
-
   },
   pc: {
     type: mongoose.Schema.Types.ObjectId,
@@ -49,6 +48,14 @@ const Order = mongoose.model("Order", {
     required: false,
   },
   countRam: {
+    type: Number,
+  },
+  processor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Processor",
+    required: false,
+  },
+  countProc: {
     type: Number,
   },
 });

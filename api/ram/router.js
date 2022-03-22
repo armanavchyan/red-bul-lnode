@@ -6,6 +6,7 @@ import { expressValidationResult } from "../../utils/middlewares.js";
 import * as validator from "./validator.js";
 import * as controller from "./controller.js";
 import * as errorMessages from "../../constants/errorMessages.js";
+import * as fileValidator from "../file/validator.js";
 
 const router = express.Router();
 
@@ -23,14 +24,14 @@ router.post(
     .isLength({ min: 4, max: 255 }),
   body("brand", errorMessages.stringErrMessage(4, 255))
     .isLength({ min: 4, max: 255 }),
-  body("color", errorMessages.stringErrMessage(4, 255)).isHexColor(),
-  body("memorySpeed", errorMessages.integerErrMessage(1, 1000000)).isInt({ min: 1, max: 10000 }),
-  body("generation "),
+  body("memorySpeed", errorMessages.integerErrMessage(1, 10000))
+    .isInt({ min: 1, max: 10000 }),
+  body("memorySize", errorMessages.integerErrMessage(1, 10000))
+    .isInt({ min: 1, max: 10000 }),
+  body("generation", errorMessages.isDdr).custom(validator.isDdrNum),
   body("price", errorMessages.integerErrMessage(1, 1000000))
     .isInt({ min: 1, max: 1000000 }),
-
-  // body("image", errorMessages.stringErrMessage(4, 255)),
-
+  body("img", errorMessages.notFound).custom(fileValidator.isExists),
   expressValidationResult,
   controller.create,
 );
@@ -42,13 +43,16 @@ router.patch(
     .isLength({ min: 4, max: 255 }),
   body("brand", errorMessages.stringErrMessage(4, 255)).optional()
     .isLength({ min: 4, max: 255 }),
-  body("color", errorMessages.stringErrMessage(4, 255)).optional().isHexColor(),
-  body("inch", errorMessages.isDeciNum).optional().isDecimal({ min: 9, max: 1000 }),
-  body("price", errorMessages.integerErrMessage(1, 1000000)).optional()
-    .isInt({ min: 1, max: 1000000 }),
-
-  // body("image", errorMessages.stringErrMessage(4, 255)),
-
+  body("memorySpeed", errorMessages.integerErrMessage(1, 10000))
+    .optional().isInt({ min: 1, max: 10000 }),
+  body("memorySize", errorMessages.integerErrMessage(1, 10000))
+    .optional().isInt({ min: 1, max: 10000 }),
+  body("generation", errorMessages.isDdr).optional()
+    .custom(validator.isDdrNum),
+  body("price", errorMessages.integerErrMessage(1, 1000000))
+    .optional().isInt({ min: 1, max: 1000000 }),
+  body("img", errorMessages.notFound).optional()
+    .custom(fileValidator.isExists),
   body("_id", errorMessages.notAccessible)
     .optional().custom(() => Promise.reject()),
   expressValidationResult,

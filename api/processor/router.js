@@ -22,14 +22,16 @@ router.post(
   "/",
   body("name", errorMessages.stringErrMessage(4, 255))
     .isLength({ min: 4, max: 255 }),
-  body("price", errorMessages.integerErrMessage(0, 10000000))
-    .isInt({ min: 0, max: 10000000 }),
-  body("weight", errorMessages.integerErrMessage(0, 10))
-    .isInt({ min: 0, max: 10 }),
   body("brand", errorMessages.stringErrMessage(4, 255))
     .isLength({ min: 4, max: 255 }),
-  body("color", errorMessages.stringErrMessage(4, 255))
-    .isHexColor(),
+  body("totalCores", errorMessages.integerErrMessage(1, 10000))
+    .isInt({ min: 1, max: 10000 }),
+  body("totalThreads", errorMessages.integerErrMessage(1, 10000))
+    .isInt({ min: 1, max: 10000 }),
+  body("generation", errorMessages.stringErrMessage(4, 255))
+    .isLength({ min: 4, max: 255 }),
+  body("price", errorMessages.integerErrMessage(1, 1000000))
+    .isInt({ min: 1, max: 1000000 }),
   body("img", errorMessages.notFound).custom(fileValidator.isExists),
   expressValidationResult,
   controller.create,
@@ -40,14 +42,16 @@ router.patch(
   param("id", errorMessages.notFound).custom(validator.isExists),
   body("name", errorMessages.stringErrMessage(4, 255)).optional()
     .isLength({ min: 4, max: 255 }),
-  body("price", errorMessages.integerErrMessage(0, 1000000)).optional()
-    .isInt({ min: 0, max: 1000000 }),
-  body("weight", errorMessages.integerErrMessage(0, 10)).optional()
-    .isInt({ min: 0, max: 10 }),
   body("brand", errorMessages.stringErrMessage(4, 255)).optional()
     .isLength({ min: 4, max: 255 }),
-  body("color", errorMessages.stringErrMessage(4, 255)).optional()
-    .isHexColor(),
+  body("totalCores", errorMessages.integerErrMessage(1, 10000))
+    .optional().isInt({ min: 1, max: 10000 }),
+  body("totalThreads", errorMessages.integerErrMessage(1, 10000))
+    .optional().isInt({ min: 1, max: 10000 }),
+  body("generation", errorMessages.stringErrMessage(4, 255))
+    .optional().isLength({ min: 4, max: 255 }),
+  body("price", errorMessages.integerErrMessage(1, 1000000))
+    .optional().isInt({ min: 1, max: 1000000 }),
   body("img", errorMessages.notFound).optional()
     .custom(fileValidator.isExists),
   body("_id", errorMessages.notAccessible)

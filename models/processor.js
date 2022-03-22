@@ -2,7 +2,7 @@
 /* eslint-disable quotes */
 import mongoose from "mongoose";
 
-const Mouse = mongoose.model("Mouse", {
+const Processor = mongoose.model("Processor", {
   _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
@@ -12,16 +12,20 @@ const Mouse = mongoose.model("Mouse", {
     type: String,
     required: true,
   },
-  isWireless: {
-    type: Boolean,
+  totalCores: {
+    type: Number,
+    required: true,
+  },
+  totalThreads: {
+    type: Number,
+    required: true,
+  },
+  generation: {
+    type: String,
     required: true,
   },
   price: {
     type: Number,
-    required: true,
-  },
-  color: {
-    type: String,
     required: true,
   },
   img: {
@@ -31,4 +35,4 @@ const Mouse = mongoose.model("Mouse", {
   },
 });
 
-export default Mouse;
+export default Processor;

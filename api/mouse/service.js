@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import mongoose from 'mongoose';
-import Mouse from "../../models/pc.js";
+import Mouse from "../../models/mouse.js";
 
 export async function getOneService(id) {
   const mouse = await Mouse.findById(id)

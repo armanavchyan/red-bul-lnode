@@ -24,8 +24,9 @@ const Keyboard = mongoose.model("Keyboard", {
     type: String,
     required: true,
   },
-  image: {
-    type: mongoose.ObjectId,
+  img: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'File',
     required: true,
   },
 });

@@ -3,73 +3,116 @@ import mongoose from 'mongoose';
 import Order from "../../models/order.js";
 
 export async function getOneService(id) {
-  const order = await Order.findById(id).select(
-    ['name',
-      'price',
-      'weigh',
-      'brand',
-      'color',
-      'countLap'],
-  )
-    .populate(
-      'laptop',
-      ['name',
-        'price',
-        'weigh',
-        'brand',
-        'color'],
-    ).select(
-      ['namprocNamee',
-        'price',
-        'weigh',
-        'brand',
-        'usb',
-        'countPc'],
-    )
-    .populate(
-      'pc',
-      ['procName',
-        'price',
-        'weigh',
-        'brand',
-        'usb'],
-    );
+  const order = await Order.findById(id)
+    .populate([
+      {
+        path: 'laptop',
+        model: 'Laptop',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'pc',
+        model: 'Pc',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'mouse',
+        model: 'Mouse',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'keyboard',
+        model: 'Keyboard',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'display',
+        model: 'Display',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'ram',
+        model: 'Ram',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'processor',
+        model: 'Processor',
+        populate: {
+          path: 'img',
+        },
+      },
+
+    ]);
+
   return order;
 }
 export async function getAllService() {
   const orders = await Order.find()
-    .select(
-      ['name',
-        'price',
-        'weigh',
-        'brand',
-        'color',
-        'countLap'],
-    )
-    .populate(
-      'laptop',
-      ['name',
-        'price',
-        'weigh',
-        'brand',
-        'color'],
+    .populate([
+      {
+        path: 'laptop',
+        model: 'Laptop',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'pc',
+        model: 'Pc',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'mouse',
+        model: 'Mouse',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'keyboard',
+        model: 'Keyboard',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'display',
+        model: 'Display',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'ram',
+        model: 'Ram',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'processor',
+        model: 'Processor',
+        populate: {
+          path: 'img',
+        },
+      },
 
-    ).select(
-      ['namprocNamee',
-        'price',
-        'weigh',
-        'brand',
-        'usb',
-        'countPc'],
-    )
-    .populate(
-      'pc',
-      ['procName',
-        'price',
-        'weigh',
-        'brand',
-        'usb'],
-    );
+    ]);
 
   return orders;
 }
@@ -85,38 +128,58 @@ export async function createService(body) {
 
 export async function updateService(body, id) {
   const orders = await Order.findByIdAndUpdate({ _id: id }, body)
-    .select(
-      ['name',
-        'price',
-        'weigh',
-        'brand',
-        'color',
-        'countLap'],
-    )
-    .populate(
-      'laptop',
-      ['name',
-        'price',
-        'weigh',
-        'brand',
-        'color'],
+    .populate([
+      {
+        path: 'laptop',
+        model: 'Laptop',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'pc',
+        model: 'Pc',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'mouse',
+        model: 'Mouse',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'keyboard',
+        model: 'Keyboard',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'display',
+        model: 'Display',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'ram',
+        model: 'Ram',
+        populate: {
+          path: 'img',
+        },
+      },
+      {
+        path: 'processor',
+        model: 'Processor',
+        populate: {
+          path: 'img',
+        },
+      },
 
-    ).select(
-      ['namprocNamee',
-        'price',
-        'weigh',
-        'brand',
-        'usb',
-        'countPc'],
-    )
-    .populate(
-      'pc',
-      ['procName',
-        'price',
-        'weigh',
-        'brand',
-        'usb'],
-    );
+    ]);
   return orders;
 }
 
