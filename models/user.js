@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const User = mongoose.model("User", {
   _id: mongoose.Schema.Types.ObjectId,
-  username: {
+  email: {
     type: String,
     required: true,
   },
@@ -22,6 +22,11 @@ const User = mongoose.model("User", {
   password: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+    default: "USER",
   },
 });
 

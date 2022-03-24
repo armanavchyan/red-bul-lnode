@@ -21,7 +21,8 @@ router.get(
 
 router.post(
   "/",
-  body("username", errorMessages.stringErrMessage(4, 255)).isLength({ min: 4, max: 255 }),
+  body("email", errorMessages.isEmail).isEmail(),
+  body("email", errorMessages.isEmail).custom(validator.isExistsEmail),
 
   body("fName", errorMessages.stringErrMessage(2, 255)).isLength({ min: 2, max: 255 }),
   body("fName", nameError).custom(validator.nameCostomValid).isAlpha(),
@@ -30,6 +31,7 @@ router.post(
   body("lName", nameError).custom(validator.nameCostomValid).isAlpha(),
 
   body("age", errorMessages.integerErrMessage(1, 150)).isInt({ min: 1, max: 150 }),
+  body("password", errorMessages.stringErrMessage(8, 30)).isLength({ min: 8, max: 30 }),
 
   expressValidationResult,
 
