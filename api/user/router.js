@@ -42,17 +42,23 @@ router.patch(
   "/:id",
   param("id", errorMessages.notFound).custom(validator.isExists),
 
-  body("username").optional().isLength({ min: 4, max: 255 }),
+  body("email", errorMessages.isEmail).isEmail(),
+  body("email", errorMessages.isEmail).optional()
+    .custom(validator.isExistsEmail),
 
-  body("fName", errorMessages.nameOnlyLetters).optional()
-    .isLength({ min: 2, max: 255 }).custom(validator.nameCostomValid)
+  body("fName", errorMessages.stringErrMessage(2, 255)).optional()
+    .isLength({ min: 2, max: 255 }),
+  body("fName", nameError).custom(validator.nameCostomValid).optional()
     .isAlpha(),
 
-  body("lName", errorMessages.nameOnlyLetters).optional()
-    .isLength({ min: 2, max: 255 }).custom(validator.nameCostomValid)
-    .isAlpha(),
+  body("lName", errorMessages.stringErrMessage(2, 255)).optional()
+    .isLength({ min: 2, max: 255 }),
+  body("lName", nameError).custom(validator.nameCostomValid).isAlpha(),
 
-  body("age", errorMessages.integerErrMessage(1, 150)).optional().isInt({ min: 1, max: 150 }),
+  body("age", errorMessages.integerErrMessage(1, 150)).optional()
+    .isInt({ min: 1, max: 150 }),
+  body("password", errorMessages.stringErrMessage(8, 30)).optional()
+    .isLength({ min: 8, max: 30 }),
   body('_id', errorMessages.notAccessible).optional().custom(() => Promise.reject()),
 
   expressValidationResult,

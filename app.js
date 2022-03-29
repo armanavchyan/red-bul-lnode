@@ -13,6 +13,8 @@ import keyboardRouter from "./api/keyboard/router.js";
 import displayRouter from "./api/display/router.js";
 import ramRouter from "./api/ram/router.js";
 import processorRouter from "./api/processor/router.js";
+import authRouter from "./api/auth/router.js";
+import { authentication } from "./utils/jwt-helper.js";
 
 mongoose.connect("mongodb+srv://root:root@redbull.vql9r.mongodb.net/redbull?retryWrites=true&w=majority");
 const app = express();
@@ -21,6 +23,8 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 app.use(morgan("dev"));
 
+app.use("/auth", authRouter);
+app.use(authentication);
 app.use("/user", userRouter);
 app.use("/laptop", laptopRouter);
 app.use("/file", fileRouter);

@@ -33,8 +33,8 @@ export async function create(req, res, next) {
 
 export async function update(req, res, next) {
   try {
-    const { body, params: { id } } = req;
-    const users = await updateService(body, id);
+    const { params: { id }, body } = req;
+    const users = await updateService(id, body);
     res.send(JSON.stringify(users));
   } catch (err) {
     next(err);

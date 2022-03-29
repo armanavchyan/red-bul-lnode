@@ -1,17 +1,16 @@
 /* eslint-disable no-return-await */
 /* eslint-disable quotes */
 import mongoose from 'mongoose';
-import bcrypt from "bcrypt";
 import User from "../../models/user.js";
 import { sentMail } from "../../utils/miling.js";
+import { hashPassword } from '../../utils/helper.js';
 
-const saltRounds = 10;
 export async function getOneService(id) {
   const user = await User.findById(id)
     .select(["email", "fName", "lName", "age"]);
   return user;
 }
-export async function getOneEmailService(email) {
+export async function getOneByEmailService(email) {
   const user = await User.findOne({ email });
   return user;
 }
@@ -23,11 +22,10 @@ export async function getAllService() {
 
 export async function createService(body) {
   const { password, ...restBody } = body;
-  const hashPass = await bcrypt.hash(password, saltRounds);
   const user = new User({
     _id: mongoose.Types.ObjectId(),
     ...restBody,
-    password: hashPass,
+    password: await hashPassword(password),
   });
   const content = "Welcom to our site";
   await user.save();

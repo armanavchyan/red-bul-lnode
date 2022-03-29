@@ -1,4 +1,4 @@
-import { getOneService, getOneEmailService } from "./service.js";
+import { getOneService, getOneByEmailService } from "./service.js";
 
 export function nameCostomValid(val) {
   if (val[0] < "A" || val[0] > "Z") {
@@ -16,7 +16,7 @@ export async function isExists(val) {
   return true;
 }
 export async function isExistsEmail(email) {
-  const user = await getOneEmailService(email);
+  const user = await getOneByEmailService(email);
   if (user) {
     return Promise.reject();
   }
