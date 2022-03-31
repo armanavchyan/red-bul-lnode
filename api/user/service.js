@@ -7,16 +7,22 @@ import { hashPassword } from '../../utils/helper.js';
 
 export async function getOneService(id) {
   const user = await User.findById(id)
-    .select(["email", "fName", "lName", "age"]);
+    .select(["email", "fName", "lName", "age", 'password', 'isVerified']);
   return user;
 }
 export async function getOneByEmailService(email) {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email })
+    .select(["email", "fName", "lName", "age", 'password', "role", 'isVerified']);
+  return user;
+}
+export async function getOneByRoleService(role) {
+  const user = await User.findOne({ role })
+    .select(["email", "fName", "lName", "age", 'password', "role", 'isVerified']);
   return user;
 }
 export async function getAllService() {
   const users = await User.find()
-    .select(["email", "fName", "lName", "age"]);
+    .select(["email", "fName", "lName", "age", 'password', 'isVerified', "role", 'isVerified']);
   return users;
 }
 
@@ -27,20 +33,19 @@ export async function createService(body) {
     ...restBody,
     password: await hashPassword(password),
   });
-  const content = "Welcom to our site";
   await user.save();
-  await sentMail(body.email, content);
+  await sentMail(body.email);
   return await getOneService(user._id);
 }
 
-export async function updateService(body, id) {
+export async function updateService(id, body) {
   const user = await User.findByIdAndUpdate({ _id: id }, body)
-    .select(["email", "fName", "lName", "age"]);
+    .select(["email", "fName", "lName", "age", 'password', 'isVerified']);
   return user;
 }
 
 export async function removeService(id) {
   const user = await User.findByIdAndRemove({ _id: id })
-    .select(["email", "fName", "lName", "age"]);
+    .select(["email", "fName", "lName", "age", 'password', 'isVerified']);
   return user;
 }

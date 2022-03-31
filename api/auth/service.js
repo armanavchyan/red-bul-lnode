@@ -7,6 +7,9 @@ export async function signinService(user, password) {
   if (!user) {
     return Promise.reject(401);
   }
+  if (!user.isVerified) {
+    return Promise.reject(401);
+  }
 
   const isEqual = await compare(password, user.password);
   if (!isEqual) {

@@ -1,3 +1,5 @@
+import { sign } from "../../utils/jwt-helper.js";
+import { sentMail } from "../../utils/miling.js";
 import {
   getOneService, getAllService, createService, updateService, removeService,
 } from "./service.js";
@@ -25,6 +27,8 @@ export async function create(req, res, next) {
   try {
     const { body } = req;
     const users = await createService(body);
+    const jwt = sign({ _id: users._id }, "5m");
+    await sentMail(body.email, jwt);
     res.send(JSON.stringify(users));
   } catch (err) {
     next(err);

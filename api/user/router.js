@@ -32,6 +32,7 @@ router.post(
 
   body("age", errorMessages.integerErrMessage(1, 150)).isInt({ min: 1, max: 150 }),
   body("password", errorMessages.stringErrMessage(8, 30)).isLength({ min: 8, max: 30 }),
+  body("isVerified", errorMessages.isBool).optional().isBoolean(),
 
   expressValidationResult,
 

@@ -28,6 +28,11 @@ const User = mongoose.model("User", {
     required: true,
     default: "USER",
   },
+  isVerified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 export default User;

@@ -16,4 +16,19 @@ router.post(
   controller.singin,
 );
 
+router.post(
+  "/confirm",
+
+  body("token", errorMessages.isJWTToken).isJWT(),
+  expressValidationResult,
+  controller.confirm,
+);
+router.post(
+  "/remail",
+
+  body("email", errorMessages.isEmail).isEmail(),
+  expressValidationResult,
+  controller.reMail,
+);
+
 export default router;

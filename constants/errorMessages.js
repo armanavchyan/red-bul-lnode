@@ -6,6 +6,7 @@ export const isEmail = "field must be email";
 export const isDeciNum = "field must contain only float number";
 export const isDdr = "field must contain only 'ddr3' or 'ddr4' or 'ddr5'";
 export const exists = "email is exists";
+export const isJWTToken = "field must be JWT token";
 
 export const stringErrMessage = (min, max) => `field length must be more then ${min} and less ${max}`;
 export const integerErrMessage = (min, max) => `field must be more then ${min} and less ${max}`;

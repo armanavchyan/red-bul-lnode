@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export async function sentMail(email, content) {
+export async function sentMail(email, jwt) {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -16,8 +16,9 @@ export async function sentMail(email, content) {
     from: "\"RedBull 👻\" readboolyan@gmail.com", // sender address
     to: email, // list of receivers
     subject: `Hello ${email}`, // Subject line
-    text: content, // plain text body
-    html: `<b>${content}</b>`, // html body
+    text: jwt, // plain text body
+  //   html: `<a href = "
+  //   http://localhost:3000">ancir hghumov</a>`, // html body
   });
   return info;
 }

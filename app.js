@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
 import express from "express";
@@ -15,6 +16,7 @@ import ramRouter from "./api/ram/router.js";
 import processorRouter from "./api/processor/router.js";
 import authRouter from "./api/auth/router.js";
 import { authentication } from "./utils/jwt-helper.js";
+import { setDBData } from "./dbDefault/index.js";
 
 mongoose.connect("mongodb+srv://root:root@redbull.vql9r.mongodb.net/redbull?retryWrites=true&w=majority");
 const app = express();
@@ -45,4 +47,11 @@ app.use((err, req, res, next) => {
   });
 });
 
+async function init() {
+  await setDBData();
+}
+
+init().then(() => {
+  console.log("The project is inited");
+});
 export default app;
