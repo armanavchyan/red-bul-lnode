@@ -23,3 +23,11 @@ export async function isExistsEmail(email) {
 
   return true;
 }
+export async function ifIsExistsEmail(email) {
+  const user = await getOneByEmailService(email);
+  if (!user) {
+    return Promise.reject();
+  }
+
+  return true;
+}

@@ -36,10 +36,10 @@ router.post(
   "/signup",
   body("email", errorMessages.isEmail).isEmail(),
   body("email", errorMessages.exists).custom(validator.isExistsEmail),
-  body("fname", errorMessages.stringErrMessage(4, 255)).isLength({ min: 4, max: 255 }),
-  body("fname", errorMessages.nameOnlyLetters).isAlpha(),
-  body("lname", errorMessages.stringErrMessage(4, 255)).isLength({ min: 4, max: 255 }),
-  body("lname", errorMessages.nameOnlyLetters).isAlpha(),
+  body("fName", errorMessages.stringErrMessage(4, 255)).isLength({ min: 4, max: 255 }),
+  body("fName", errorMessages.nameOnlyLetters).isAlpha(),
+  body("lName", errorMessages.stringErrMessage(4, 255)).isLength({ min: 4, max: 255 }),
+  body("lName", errorMessages.nameOnlyLetters).isAlpha(),
   body("age", errorMessages.integerErrMessage(0, 100)).isInt({ min: 0, max: 100 }),
   body("password", errorMessages.stringErrMessage(8, 30)).isLength({ min: 8, max: 30 }),
   expressValidationResult,
@@ -49,7 +49,7 @@ router.post(
 router.post(
   "/forget-password",
   body("email", errorMessages.isEmail).isEmail(),
-  body("email", errorMessages.isNotExists).custom(validator.isExistsEmail),
+  body("email", errorMessages.isNotExists).custom(validator.ifIsExistsEmail),
   expressValidationResult,
   controller.forgetPassword,
 );

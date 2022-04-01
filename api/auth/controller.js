@@ -46,7 +46,7 @@ export async function singin(req, res, next) {
 export async function signup(req, res, next) {
   try {
     const { body } = req;
-    const created = createService(body);
+    const created = await createService(body);
     const jwt = sign({ _id: created._id }, "15m");
     const html = createJWTContent(jwt);
     await sentMail(body.email, html);
@@ -57,11 +57,11 @@ export async function signup(req, res, next) {
 }
 export async function forgetPassword(req, res, next) {
   try {
-    const { body } = req;
-    const user = await getOneByEmailService(body.email);
+    const { email } = req.body;
+    const user = await getOneByEmailService(email);
     const jwt = sign({ _id: user._id }, "15m");
     const html = createJWTContent(jwt);
-    await sentMail(body.email, html);
+    await sentMail(email, html);
     return res.send(JSON.stringify(user));
   } catch (err) {
     return next(err);
@@ -69,8 +69,10 @@ export async function forgetPassword(req, res, next) {
 }
 export async function recover(req, res, next) {
   try {
+    console.log(11111);
     const { token, password } = req.body;
     const decodedUser = verify(token);
+
     const updated = await updateService(decodedUser._id, { password });
     return res.send(JSON.stringify(updated));
   } catch (err) {
