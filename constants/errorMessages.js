@@ -3,6 +3,7 @@ export const notFound = "field is not found";
 export const notAccessible = "field is not accessible";
 export const isBool = "Flag property only accepts boolean";
 export const isEmail = "field must be email";
+export const isNotExists = "email is not exists";
 export const isDeciNum = "field must contain only float number";
 export const isDdr = "field must contain only 'ddr3' or 'ddr4' or 'ddr5'";
 export const exists = "email is exists";

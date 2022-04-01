@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export async function sentMail(email, jwt) {
+export async function sentMail(email, content) {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -16,9 +16,19 @@ export async function sentMail(email, jwt) {
     from: "\"RedBull 👻\" readboolyan@gmail.com", // sender address
     to: email, // list of receivers
     subject: `Hello ${email}`, // Subject line
-    text: jwt, // plain text body
-  //   html: `<a href = "
-  //   http://localhost:3000">ancir hghumov</a>`, // html body
+    // text: content, // plain text body
+    html: content, // html body
   });
   return info;
+}
+export function createPasswordContent(password) {
+  return `<div>
+    Password : ${password}
+  </div>`;
+}
+
+export function createJWTContent(jwt) {
+  return `<div>
+    Token: ${jwt}
+  </div>`;
 }
