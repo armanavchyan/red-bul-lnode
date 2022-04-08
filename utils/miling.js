@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import "dotenv/config";
 
 export async function sentMail(email, content) {
   const transporter = nodemailer.createTransport({
@@ -7,8 +8,8 @@ export async function sentMail(email, content) {
     secure: false, // true for 465, false for other ports
     tls: { rejectUnauthorized: false },
     auth: {
-      user: "readboolyan@gmail.com", // generated ethereal user
-      pass: "readbool888", // generated ethereal password
+      user: process.env.EMAIL, // generated ethereal user
+      pass: process.env.EMAIL_PASS, // generated ethereal password
     },
   });
 

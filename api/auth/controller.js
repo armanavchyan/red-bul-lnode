@@ -69,7 +69,6 @@ export async function forgetPassword(req, res, next) {
 }
 export async function recover(req, res, next) {
   try {
-    console.log(11111);
     const { token, password } = req.body;
     const decodedUser = verify(token);
 

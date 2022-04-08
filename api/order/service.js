@@ -59,8 +59,8 @@ export async function getOneService(id) {
 
   return order;
 }
-export async function getAllService() {
-  const orders = await Order.find()
+export async function getAllService(user) {
+  const orders = await Order.find({ user: user._id })
     .populate([
       {
         path: 'laptop',

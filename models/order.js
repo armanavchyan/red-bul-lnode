@@ -7,55 +7,48 @@ const Order = mongoose.model("Order", {
     ref: "Laptop",
     required: false,
   },
-  countLap: {
-    type: Number,
-  },
+
   pc: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Pc",
     required: false,
   },
-  countPc: {
-    type: Number,
-  },
+
   mouse: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Mouse",
     required: false,
   },
-  countMouse: {
-    type: Number,
-  },
+
   keyboard: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Keyboard",
     required: false,
   },
-  countKeyboard: {
-    type: Number,
-  },
+
   display: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Display",
     required: false,
   },
-  countDisplay: {
-    type: Number,
-  },
+
   ram: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Ram",
     required: false,
   },
-  countRam: {
-    type: Number,
-  },
+
   processor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Processor",
     required: false,
   },
-  countProc: {
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  count: {
     type: Number,
   },
 });

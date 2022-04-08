@@ -26,25 +26,14 @@ router.get(
 router.post(
   "/",
   body("laptop", errorMessages.notFound).optional().custom(laptopValidator.isExists),
-  body("countLap", errorMessages.integerErrMessage(1, 100000)).optional(),
   body("pc", errorMessages.notFound).optional().custom(pcValidator.isExists),
-  body("countPc", errorMessages.integerErrMessage(1, 100))
-    .optional().isInt({ min: 1, max: 100 }),
   body("mouse", errorMessages.notFound).optional().custom(mouseValidator.isExists),
-  body("countMouse", errorMessages.integerErrMessage(1, 100))
-    .optional().isInt({ min: 1, max: 100 }),
   body("keyboard", errorMessages.notFound).optional().custom(keyboardValidator.isExists),
-  body("countKeyboard", errorMessages.integerErrMessage(1, 100))
-    .optional().isInt({ min: 1, max: 100 }),
   body("display", errorMessages.notFound).optional().custom(displayValidator.isExists),
-  body("countDisplay", errorMessages.integerErrMessage(1, 100))
-    .optional().isInt({ min: 1, max: 100 }),
   body("ram", errorMessages.notFound).optional().custom(ramValidator.isExists),
-  body("countRam", errorMessages.integerErrMessage(1, 100))
-    .optional().isInt({ min: 1, max: 100 }),
   body("processor", errorMessages.notFound).optional().custom(processorValidator.isExists),
-  body("countProc", errorMessages.integerErrMessage(1, 100))
-    .optional().isInt({ min: 1, max: 100 }),
+  body("processor", errorMessages.notFound).optional().custom(processorValidator.isExists),
+  body("count", errorMessages.integerErrMessage(1, 100)).optional().isInt({ min: 1, max: 100 }),
 
   expressValidationResult,
   controller.create,
@@ -55,27 +44,17 @@ router.patch(
   param("id", errorMessages.notAccessible).custom(validator.isExists),
   body("laptop", errorMessages.notAccessible).optional()
     .custom(() => Promise.reject()),
-  body("countLap", errorMessages.integerErrMessage(1, 100)).optional()
-    .isInt({ min: 1, max: 100 }),
   body("pc", errorMessages.notAccessible).optional()
     .custom(() => Promise.reject()),
-  body("countPc", errorMessages.integerErrMessage(1, 100)).optional()
-    .optional().isInt({ min: 1, max: 100 }),
   body("mouse", errorMessages.notAccessible).optional()
     .custom(() => Promise.reject()),
-  body("countMouse", errorMessages.integerErrMessage(1, 100)).optional()
-    .optional().isInt({ min: 1, max: 100 }),
   body("keyboard", errorMessages.notAccessible).optional()
     .custom(() => Promise.reject()),
-  body("countKeyboard", errorMessages.integerErrMessage(1, 100)).optional()
-    .optional().isInt({ min: 1, max: 100 }),
   body("ram", errorMessages.notAccessible).optional()
     .custom(() => Promise.reject()),
-  body("countRam", errorMessages.integerErrMessage(1, 100)).optional()
-    .optional().isInt({ min: 1, max: 100 }),
   body("processor", errorMessages.notAccessible).optional()
     .custom(() => Promise.reject()),
-  body("countProc", errorMessages.integerErrMessage(1, 100)).optional()
+  body("count", errorMessages.integerErrMessage(1, 100)).optional()
     .optional().isInt({ min: 1, max: 100 }),
 
   expressValidationResult,

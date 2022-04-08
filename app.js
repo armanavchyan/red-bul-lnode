@@ -4,6 +4,7 @@
 import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
+import createFolder from "./utils/createFolder.js";
 import userRouter from "./api/user/router.js";
 import laptopRouter from "./api/laptop/router.js";
 import fileRouter from "./api/file/router.js";
@@ -17,8 +18,10 @@ import processorRouter from "./api/processor/router.js";
 import authRouter from "./api/auth/router.js";
 import { authentication } from "./utils/jwt-helper.js";
 import { setDBData } from "./dbDefault/index.js";
+import "dotenv/config";
 
-mongoose.connect("mongodb+srv://root:root@redbull.vql9r.mongodb.net/redbull?retryWrites=true&w=majority");
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}
+@redbull.vql9r.mongodb.net/redbull?retryWrites=true&w=majority`);
 const app = express();
 
 app.use(express.json());
@@ -46,6 +49,7 @@ app.use((err, req, res, next) => {
     type: "internal",
   });
 });
+createFolder();
 
 async function init() {
   await setDBData();

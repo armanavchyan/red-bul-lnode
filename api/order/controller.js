@@ -14,7 +14,7 @@ export async function getOne(req, res, next) {
 
 export async function getAll(req, res, next) {
   try {
-    const getOrders = await getAllService();
+    const getOrders = await getAllService(req.user);
     return res.send(JSON.stringify(getOrders));
   } catch (err) {
     return next(err);
@@ -23,7 +23,8 @@ export async function getAll(req, res, next) {
 
 export async function create(req, res, next) {
   try {
-    const { body } = req;
+    const { body, user } = req;
+    body.user = user._id;
     const creatOrder = await createService(body);
     return res.send(JSON.stringify(creatOrder));
   } catch (err) {
