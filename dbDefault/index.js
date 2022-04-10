@@ -1,17 +1,18 @@
 import { createService, getOneByRoleService } from "../api/user/service.js";
+import "dotenv/config";
 
 async function addSuperAdmin() {
-  const superAdmin = await getOneByRoleService("SuperAdmin");
+  const superAdmin = await getOneByRoleService("SUPERADMIN");
   if (superAdmin) {
     return;
   }
   const admin = {
-    email: "avchyanarman@gmail.com",
+    email: process.env.SUPER_EMAI,
     fName: "Arman",
     lName: "Avchyan",
-    age: 92,
-    password: "arm632277",
-    role: "SuperAdmin",
+    age: 37,
+    password: process.env.SUPER_PASSWORD,
+    role: "SUPERADMIN",
     isVerified: true,
   };
   await createService(admin);

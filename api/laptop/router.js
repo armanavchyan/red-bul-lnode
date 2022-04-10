@@ -2,7 +2,7 @@
 import express from "express";
 
 import { body, param } from "express-validator";
-import { expressValidationResult } from "../../utils/middlewares.js";
+import { expressValidationResult, checkRole } from "../../utils/middlewares.js";
 import * as validator from "./validator.js";
 import * as controller from "./controller.js";
 import * as errorMessages from "../../constants/errorMessages.js";
@@ -10,16 +10,18 @@ import * as fileValidator from "../file/validator.js";
 
 const router = express.Router();
 
-router.get("/", controller.getAll);
+router.get("/", checkRole("USER", "GET"), controller.getAll);
 
 router.get(
   "/:id",
+  checkRole("USER", "GET"),
   param("id", errorMessages.notFound).custom(validator.isExists),
   controller.getOne,
 );
 
 router.post(
   "/",
+  checkRole("USER", "POST"),
   body("name", errorMessages.stringErrMessage(4, 255))
     .isLength({ min: 4, max: 255 }),
   body("price", errorMessages.integerErrMessage(0, 10000000))
@@ -37,6 +39,7 @@ router.post(
 
 router.patch(
   "/:id",
+  checkRole("USER", "PATCH"),
   param("id", errorMessages.notFound).custom(validator.isExists),
   body("name", errorMessages.stringErrMessage(4, 255)).optional()
     .isLength({ min: 4, max: 255 }),
@@ -58,6 +61,7 @@ router.patch(
 
 router.delete(
   "/:id",
+  checkRole("USER", "DELETE"),
   param("id", errorMessages.notFound).custom(validator.isExists),
   expressValidationResult,
   controller.remove,

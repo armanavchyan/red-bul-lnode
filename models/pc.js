@@ -22,39 +22,27 @@ const Pc = mongoose.model("Pc", {
     ref: "Mouse",
     required: false,
   },
-  countMouse: {
-    type: Number,
-  },
   keyboard: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "keyboard",
     required: false,
-  },
-  countKeyboard: {
-    type: Number,
   },
   display: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Display",
     required: false,
   },
-  countDisplay: {
-    type: Number,
-  },
   ram: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Ram",
     required: false,
-  },
-  countRam: {
-    type: Number,
   },
   processor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Processor",
     required: false,
   },
-  countProc: {
+  count: {
     type: Number,
   },
 });

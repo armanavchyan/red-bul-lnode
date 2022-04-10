@@ -12,7 +12,7 @@ router.post(
   "/signin",
 
   body("email", errorMessages.isEmail).isEmail(),
-  body("password", errorMessages.stringErrMessage(0, 1000)).isLength({ max: 1000 }),
+  body("password", errorMessages.stringErrMessage(0, 1000)).isString().isLength({ max: 1000 }),
   expressValidationResult,
   controller.singin,
 );
@@ -41,7 +41,7 @@ router.post(
   body("lName", errorMessages.stringErrMessage(4, 255)).isLength({ min: 4, max: 255 }),
   body("lName", errorMessages.nameOnlyLetters).isAlpha(),
   body("age", errorMessages.integerErrMessage(0, 100)).isInt({ min: 0, max: 100 }),
-  body("password", errorMessages.stringErrMessage(8, 30)).isLength({ min: 8, max: 30 }),
+  body("password", errorMessages.stringErrMessage(8, 30)).isString().isLength({ min: 8, max: 30 }),
   expressValidationResult,
   controller.signup,
 );
@@ -57,7 +57,7 @@ router.post(
 router.post(
   "/recover",
   body("token", errorMessages.isJWTToken).isJWT(),
-  body("password", errorMessages.stringErrMessage(0, 1000)).isLength({ max: 1000 }),
+  body("password", errorMessages.stringErrMessage(0, 1000)).isString().isLength({ max: 1000 }),
   expressValidationResult,
   controller.recover,
 );

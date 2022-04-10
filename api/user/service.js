@@ -7,7 +7,7 @@ import { hashPassword } from '../../utils/helper.js';
 
 export async function getOneService(id) {
   const user = await User.findById(id)
-    .select(["email", "fName", "lName", "age", 'password', 'isVerified']);
+    .select(["email", "fName", "lName", "age", 'password', "role", 'isVerified']);
   return user;
 }
 export async function getOneByEmailService(email) {
@@ -22,16 +22,17 @@ export async function getOneByRoleService(role) {
 }
 export async function getAllService() {
   const users = await User.find()
-    .select(["email", "fName", "lName", "age", 'password', 'isVerified', "role", 'isVerified']);
+    .select(["email", "fName", "lName", "age", 'password', "role", 'isVerified']);
   return users;
 }
 
 export async function createService(body) {
   const { password, ...restBody } = body;
+  const hash = await hashPassword(password);
   const user = new User({
     _id: mongoose.Types.ObjectId(),
     ...restBody,
-    password: await hashPassword(password),
+    password: hash,
   });
   await user.save();
   await sentMail(body.email);
@@ -40,12 +41,12 @@ export async function createService(body) {
 
 export async function updateService(id, body) {
   const user = await User.findByIdAndUpdate({ _id: id }, body)
-    .select(["email", "fName", "lName", "age", 'password', 'isVerified']);
+    .select(["email", "fName", "lName", "age", 'password', "role", 'isVerified']);
   return user;
 }
 
 export async function removeService(id) {
   const user = await User.findByIdAndRemove({ _id: id })
-    .select(["email", "fName", "lName", "age", 'password', 'isVerified']);
+    .select(["email", "fName", "lName", "age", 'password', "role", 'isVerified']);
   return user;
 }
